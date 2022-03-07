@@ -12,23 +12,32 @@ const reducer = (state, action) => {
             return {...state, board};
         }
         case "set-selected": {
-
-            /* Copy Board */
+            /* Get payload */
             const row = action.payload.row;
             const column = action.payload.column;
+            const value = action.payload.value;
+
+            /* Copy Board */
             const board = [...state.board];
 
-            /* Copy rows that will be mutated */
+            /* Copy row that will be mutated */
+            board[row] = [...board[row]];
+
+
+            /* Set current selected row to false */
             if (state.selectedTile) {
                 const selectedRowIndex = state.selectedTile.row;
                 const selectedColIndex = state.selectedTile.column;
                 board[selectedRowIndex] = [...board[selectedRowIndex]];
                 board[selectedRowIndex][selectedColIndex].selected = false;
             }
-            console.log("Row:",row);
-            board[row] = [...board[row]];
-            board[row][column].selected = true;
-            return {...state, board, selectedTile: { row, column }};
+
+
+            /* Set new selected row */
+            board[row][column].selected = value;
+            const selectedTile = value ? { row, column } : null;
+            
+            return {...state, board, selectedTile};
         }
         default:
             return state;
@@ -42,8 +51,8 @@ const setTileValue = (dispatch) => (row, column, value) => {
 };
 
 
-const setTileSelected = (dispatch) => (row, column) => {
-    dispatch({type: "set-selected", payload: {row, column}});
+const setTileSelected = (dispatch) => (row, column, value=true) => {
+    dispatch({type: "set-selected", payload: {row, column, value}});
 };
 
 

@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { Context as SudokuContext } from '../context/sudokuContext';
 
 const useSudoku = () => {
-    const { board, setTileSelected, setTileValue } = useContext(SudokuContext);
+    const { board, selectedTile, setTileSelected, setTileValue } = useContext(SudokuContext);
 
-    return { board, setTileSelected, setTileValue };
+    return { board, selectedTile, setTileSelected, setTileValue };
 };
 
 
