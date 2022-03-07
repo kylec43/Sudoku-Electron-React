@@ -1,0 +1,38 @@
+.tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    border: 1px solid black;
+    border-right: none;
+}
+
+.tile-text {
+    margin: 0; 
+    font-size: 1.5rem; 
+    user-select: none;
+}
+
+.tile:hover {
+    background-color: lightgray;
+}
+
+.row.bottom-row .tile {
+    border-bottom: none;
+    border-top: none;
+}
+
+.row.top-row .tile {
+    border-bottom: none;
+    border-top: none;
+}
+  
+.row .tile:first-child {
+    border-left: none;
+    border-left-width: 0px;
+}
+
+.row .tile:last-child {
+    border-right: none;
+    border-right-width: 0px;
+}

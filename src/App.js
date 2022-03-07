@@ -1,25 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Board from './components/Board';
+import useSudoku from './hooks/useSudoku';
 
-function App() {
+
+const App = () => {
+  const { board, setTileSelected, setTileValue } = useSudoku();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Board
+      board={board}
+      onTilePress={setTileSelected}
+    />
   );
-}
+};
 
 export default App;
