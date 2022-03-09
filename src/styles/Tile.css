@@ -5,6 +5,9 @@
     flex: 1;
     border: 1px solid black;
     border-right: none;
+    border-right-width: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 
 .tile-text {
@@ -20,11 +23,15 @@
 .row.bottom-row .tile {
     border-bottom: none;
     border-top: none;
+    border-bottom-width: 0px;
+    border-top-width: 0px;
 }
 
 .row.top-row .tile {
     border-bottom: none;
     border-top: none;
+    border-bottom-width: 0px;
+    border-top-width: 0px;
 }
   
 .row .tile:first-child {

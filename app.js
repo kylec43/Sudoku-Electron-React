@@ -1,7 +1,8 @@
 const isDev = require('electron-is-dev');
 const Constants = require('./Constants');
 const electron = require('electron');
-const { app, BrowserWindow } = electron;
+const { app, BrowserWindow, Menu } = electron;
+const menuTemplate = require('./menuTemplate');
 
 let window;
 app.on("ready", () => {
@@ -20,7 +21,10 @@ app.on("ready", () => {
         isDev
         ? Constants.Path.DEV_INDEX_PATH
         : Constants.Path.PRODUCTION_INDEX_PATH
-    )
+    );
+
+    const mainMenu = Menu.buildFromTemplate(menuTemplate(window));
+    Menu.setApplicationMenu(mainMenu);
 
     window.show();
 });
