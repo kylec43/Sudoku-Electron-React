@@ -57,17 +57,19 @@ const setTileSelected = (dispatch) => (row, column, value=true) => {
 };
 
 
+function formatSudokuBoard(board) {
+    return board.map((row, rowIndex) => {
+        return row.map((value, columnIndex) => {
+            return {row: rowIndex, column: columnIndex, value, selected: false}
+        });
+     });
+}
+
+
 
 
 /* initialBoardState */
-let initialBoardState = sudokuGenerator();
-
-
- initialBoardState = initialBoardState.map((row, rowIndex) => {
-    return row.map((value, columnIndex) => {
-        return {row: rowIndex, column: columnIndex, value, selected: false}
-    });
- });
+let initialBoardState = formatSudokuBoard(sudokuGenerator());
 
 export const { Context, Provider } = createDataContext(
     reducer,
