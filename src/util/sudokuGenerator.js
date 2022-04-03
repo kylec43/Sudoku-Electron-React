@@ -94,6 +94,10 @@ function mapNumbers(board, n=9) {
     return board;
 }
 
+function pokeHoles(board, amount=30) {
+
+}
+
 function sudokuShuffle(board) {
     mapNumbers(board);
     shuffleRows(board);
