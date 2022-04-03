@@ -69,7 +69,33 @@ function rotateBoard(board, n=null) {
     return board;
 }
 
+function mapNumbers(board, n=9) {
+
+    for (let i = 0; i < n; i++) {
+
+        const n1 = Math.floor(Math.random()*9 + 1);
+        const n2 = Math.floor(Math.random()*9 + 1);
+        for (let row = 0; row < board.length; row++) {
+            for (let col = 0; col < board[row].length; col++) {
+                switch (board[row][col]) {
+                    case n1:
+                        board[row][col] = n2;
+                        break;
+                    case n2:
+                        board[row][col] = n1;
+                        break;
+                    default:
+                        break;;
+                }
+            }
+        }
+    }
+
+    return board;
+}
+
 function sudokuShuffle(board) {
+    mapNumbers(board);
     shuffleRows(board);
     shuffleColumns(board);
     rotateBoard(board);
@@ -98,4 +124,5 @@ function sudokuGenerator() {
     return board;
 }
 
+console.log(sudokuGenerator());
 export default sudokuGenerator;
