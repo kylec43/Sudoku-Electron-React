@@ -1,5 +1,8 @@
 function shuffleRows(board, n=3) {
 
+    board = board.map(r => [...r]);
+
+
     for (let boxRow = 0; boxRow < 3; boxRow++) {
 
         for (let i = 0; i < n; i++) {
@@ -19,6 +22,9 @@ function shuffleRows(board, n=3) {
 }
 
 function shuffleColumns(board, n=3) {
+
+    board = board.map(r => [...r]);
+
 
     for (let boxCol = 0; boxCol < 3; boxCol++) {
 
@@ -43,6 +49,9 @@ function shuffleColumns(board, n=3) {
 }
 
 function rotateBoard(board, n=null) {
+
+    board = board.map(r => [...r]);
+
 
     if (n === null) {
         n = Math.floor(Math.random() * 4);
@@ -71,6 +80,9 @@ function rotateBoard(board, n=null) {
 
 function mapNumbers(board, n=9) {
 
+    board = board.map(r => [...r]);
+
+
     for (let i = 0; i < n; i++) {
 
         const n1 = Math.floor(Math.random()*9 + 1);
@@ -94,15 +106,46 @@ function mapNumbers(board, n=9) {
     return board;
 }
 
-function pokeHoles(board, amount=30) {
+function pokeHoles(board, holes=51) {
 
+    board = board.map(r => [...r]);
+    const removedValues = [];
+
+
+    while (removedValues.length < holes) {
+        
+        /* Generate random position to poke hole */
+        const val = Math.random()*81;
+        const row = Math.floor(val/9);
+        const col = Math.floor(val%9);
+
+        if (board[row][col] == 0) continue; //Position already removed
+
+        /* Poke hole */
+        removedValues.push({
+            row,
+            col,
+            value: board[row][col]
+        });
+
+        board[row][col] = 0;
+        const proposedBoard = board.map(r => [...r]);
+
+        return {board, removedValues};
+
+    }
 }
 
-function sudokuShuffle(board) {
-    mapNumbers(board);
-    shuffleRows(board);
-    shuffleColumns(board);
-    rotateBoard(board);
+function sudokuShuffle(board, hints=30) {
+
+    board = board.map(r => [...r]);
+
+
+    board = mapNumbers(board);  //swap numbers
+    board = shuffleRows(board); //swap rows in boxes
+    board = shuffleColumns(board); //swap columns in boxes
+    board = rotateBoard(board); //rotate the board randomly
+    board = pokeHoles(board, 81-hints); //poke n number of holes with a unique solution
     return board;
 }
 
@@ -110,7 +153,7 @@ function sudokuShuffle(board) {
 
 function sudokuGenerator() {
 
-    const board = 
+    let board = 
     [
         [8,3,5,4,1,6,9,2,7],
         [2,9,6,8,5,7,4,3,1],
@@ -123,7 +166,7 @@ function sudokuGenerator() {
         [3,7,4,9,6,2,8,1,5]
     ];
 
-    sudokuShuffle(board);
+    board = sudokuShuffle(board);
 
     return board;
 }

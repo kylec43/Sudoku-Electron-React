@@ -69,7 +69,7 @@ function formatSudokuBoard(board) {
 
 
 /* initialBoardState */
-let initialBoardState = formatSudokuBoard(sudokuGenerator());
+const initialBoardState = formatSudokuBoard(sudokuGenerator());
 
 export const { Context, Provider } = createDataContext(
     reducer,
