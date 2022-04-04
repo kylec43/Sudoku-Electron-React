@@ -145,7 +145,7 @@ function sudokuShuffle(board, hints=30) {
     board = shuffleRows(board); //swap rows in boxes
     board = shuffleColumns(board); //swap columns in boxes
     board = rotateBoard(board); //rotate the board randomly
-    board = pokeHoles(board, 81-hints); //poke n number of holes with a unique solution
+    board = pokeHoles(board, 81-hints).board; //poke n number of holes with a unique solution
     return board;
 }
 
